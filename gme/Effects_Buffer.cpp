@@ -107,7 +107,7 @@ blargg_err_t Effects_Buffer::set_sample_rate( long rate, int msec )
 	}
 	catch(std::bad_alloc& ba)
 	{
-		return "Out of memory";
+		return ERR_OUT_OF_MEMORY;
 	}
 
 	for ( int i = 0; i < buf_count; i++ )

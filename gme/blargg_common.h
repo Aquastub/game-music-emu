@@ -33,9 +33,9 @@
 	#define blaarg_static_assert(cond, msg) assert(cond)
 #endif
 
-// blargg_err_t (0 on success, otherwise error string)
+// blargg_err_t (0 on success, otherwise error enum)
 #ifndef blargg_err_t
-	typedef const char* blargg_err_t;
+#include "blargg_err.h"
 #endif
 
 // blargg_vector - very lightweight vector of POD types (no constructor/destructor)
@@ -53,10 +53,10 @@ public:
 	{
 		void* p = realloc( begin_, n * sizeof (T) );
 		if ( !p && n )
-			return "Out of memory";
+			return ERR_OUT_OF_MEMORY;
 		begin_ = (T*) p;
 		size_ = n;
-		return nullptr;
+		return 0;
 	}
 	void clear() { free( begin_ ); begin_ = nullptr; size_ = 0; }
 	T& operator [] ( size_t n ) const
